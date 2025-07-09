@@ -3,6 +3,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 20;
+    public float TurnSpeed;
+    public float HorizontalInput;
+    public float ForwardInput;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,7 +16,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Movement
-
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        HorizontalInput = Input.GetAxis("Horizontal");
+        ForwardInput = Input.GetAxis("Vertical");
+        //Move car based on vertical input
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * ForwardInput);
+        //Move car based on horizontal input
+        transform.Rotate(Vector3.up * Time.deltaTime * TurnSpeed * HorizontalInput);
     }
 }
